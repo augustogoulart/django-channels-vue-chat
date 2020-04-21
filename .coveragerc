@@ -1,0 +1,6 @@
+[run]
+omit =
+    vchannels/wsgi.py
+    vchannels/asgi.py
+    manage.py
+    */migrations/*

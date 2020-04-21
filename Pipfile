@@ -4,6 +4,7 @@ url = "https://pypi.org/simple"
 verify_ssl = true
 
 [dev-packages]
+ipdb = "*"
 
 [packages]
 django = "*"
@@ -12,6 +13,10 @@ dj-database-url = "*"
 dj-static = "*"
 psycopg2-binary = "*"
 gunicorn = "*"
+pytest-django = "*"
+pyyaml = "*"
+coveralls = "*"
+pytest-cov = "*"
 
 [requires]
 python_version = "3.7"
