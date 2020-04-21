@@ -39,7 +39,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'channels',
+    'django_extensions',
+
     'vchannels.core',
+    'vchannels.chat',
 ]
 
 MIDDLEWARE = [
@@ -72,6 +76,8 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'vchannels.wsgi.application'
 
+# Channels
+ASGI_APPLICATION = 'vchannels.routing.application'
 
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases

@@ -17,6 +17,8 @@ pytest-django = "*"
 pyyaml = "*"
 coveralls = "*"
 pytest-cov = "*"
+channels = "*"
+django-extensions = "*"
 
 [requires]
 python_version = "3.7"
