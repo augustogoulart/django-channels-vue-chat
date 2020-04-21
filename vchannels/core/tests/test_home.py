@@ -7,5 +7,3 @@ def test_template_used(client):
     response = client.get('/')
     templates = response.templates
     assert 'core/core.html' in [template.name for template in templates]
-
-
