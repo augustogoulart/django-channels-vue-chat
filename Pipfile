@@ -19,6 +19,7 @@ coveralls = "*"
 pytest-cov = "*"
 channels = "*"
 django-extensions = "*"
+pytest-asyncio = "*"
 
 [requires]
 python_version = "3.7"
