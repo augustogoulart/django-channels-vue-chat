@@ -57,6 +57,3 @@ async def test_consumer_accepts_connection():
     communicator = WebsocketCommunicator(ChatConsumer, "/ws/chat/room")
     connected, subprotocol = await communicator.connect()
     assert connected
-    await communicator.disconnect()
-
-
