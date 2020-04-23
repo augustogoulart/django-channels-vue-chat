@@ -1,46 +1,64 @@
 {% extends 'base.html' %}
+{% load static %}
+
+{% block navbar %}
+  <nav class="navbar sticky-top navbar-light bg-light" style="background-color: #1abc9c!important;">
+    <div class="container">
+      <div class="row">
+        <a class="navbar-brand" href="#" style="color: white">{{ room_name }} Channel</a>
+      </div>
+    </div>
+  </nav>
+{% endblock navbar %}
 
 {% block content %}
-  <h1>Welcome to {{ room_name }}</h1>
-  <textarea id="chat-log" cols="100" rows="20"></textarea><br>
-  <input id="chat-message-input" type="text" size="100"><br>
-  <input id="chat-message-submit" type="button" value="Send">
-  {{ room_name|json_script:"room-name" }}
-  <script>
-    const roomName = JSON.parse(document.getElementById('room-name').textContent);
-    const ws_scheme = window.location.protocol == "https:" ? "wss" : "ws";
-    const chatSocket = new WebSocket(
-          ws_scheme
-        + '://'
-        + window.location.host
-        + '/ws/chat/'
-        + roomName
-        + '/'
-    );
+  <div class="row">
+      <div class="form-group">
+        <label for="chat-log"></label>
+        <textarea class="form-control" id="chat-log" cols="150" rows="20"></textarea><br>
+        <input class="form-control" id="chat-message-input" type="text"><br>
+        <input class="form-control send-message" id="chat-message-submit" type="button" value="Send"
+               style="background-color: #16a085; color: white; height: 50px">
+        {{ room_name|json_script:"room-name" }}
+        <script>
+          const roomName = JSON.parse(document.getElementById('room-name').textContent);
+          const ws_scheme = window.location.protocol == "https:" ? "wss" : "ws";
+          const chatSocket = new WebSocket(
+                  ws_scheme
+                  + '://'
+                  + window.location.host
+                  + '/ws/chat/'
+                  + roomName
+                  + '/'
+          );
 
-    chatSocket.onmessage = function(e) {
-        const data = JSON.parse(e.data);
-        document.querySelector('#chat-log').value += (data.message + '\n');
-    };
+          chatSocket.onmessage = function (e) {
+            const data = JSON.parse(e.data);
+            document.querySelector('#chat-log').value += (data.message + '\n');
+          };
 
-    chatSocket.onclose = function(e) {
-        console.error('Chat socket closed unexpectedly');
-    };
+          chatSocket.onclose = function (e) {
+            console.error('Chat socket closed unexpectedly');
+          };
 
-    document.querySelector('#chat-message-input').focus();
-    document.querySelector('#chat-message-input').onkeyup = function(e) {
-        if (e.keyCode === 13) {  // enter, return
-            document.querySelector('#chat-message-submit').click();
-        }
-    };
+          document.querySelector('#chat-message-input').focus();
+          document.querySelector('#chat-message-input').onkeyup = function (e) {
+            if (e.keyCode === 13) {  // enter, return
+              document.querySelector('#chat-message-submit').click();
+            }
+          };
 
-    document.querySelector('#chat-message-submit').onclick = function(e) {
-        const messageInputDom = document.querySelector('#chat-message-input');
-        const message = messageInputDom.value;
-        chatSocket.send(JSON.stringify({
-            'message': message
-        }));
-        messageInputDom.value = '';
-    };
-  </script>
+          document.querySelector('#chat-message-submit').onclick = function (e) {
+            const messageInputDom = document.querySelector('#chat-message-input');
+            const message = messageInputDom.value;
+            chatSocket.send(JSON.stringify({
+              'message': message
+            }));
+            messageInputDom.value = '';
+          };
+        </script>
+
+      </div>
+    </div>
+  </div>
 {% endblock content %}
