@@ -1,3 +1,14 @@
 body{
     background-color: rgba(216, 252, 215, 0.32);
 }
+
+.join-chat-row{
+    margin-top: 25vh;
+}
+
+.default-button{
+    background-color: #16a085;
+    color: white;
+    font-size: 2rem;
+    height: 70px;
+}

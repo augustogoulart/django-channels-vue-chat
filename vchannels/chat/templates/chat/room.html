@@ -17,8 +17,7 @@
         <label for="chat-log"></label>
         <textarea class="form-control" id="chat-log" cols="150" rows="20"></textarea><br>
         <input class="form-control" id="chat-message-input" type="text"><br>
-        <input class="form-control send-message" id="chat-message-submit" type="button" value="Send"
-               style="background-color: #16a085; color: white; height: 50px">
+        <input class="form-control send-message default-button" id="chat-message-submit" type="button" value="Send">
         {{ room_name|json_script:"room-name" }}
         <script>
           const roomName = JSON.parse(document.getElementById('room-name').textContent);
