@@ -3,7 +3,6 @@ import string
 import pytest
 from django.conf import settings
 from channels.routing import ProtocolTypeRouter
-from channels.testing import WebsocketCommunicator
 
 from vchannels.routing import application
 from ..consumers import ChatConsumer
@@ -51,9 +50,3 @@ def test_room_page_displays_room_name(client):
     response = client.get(f'/chat/{room_name}')
     assert room_name.encode() in response.content
 
-
-@pytest.mark.asyncio
-async def test_consumer_accepts_connection():
-    communicator = WebsocketCommunicator(ChatConsumer, "/ws/chat/room")
-    connected, subprotocol = await communicator.connect()
-    assert connected
