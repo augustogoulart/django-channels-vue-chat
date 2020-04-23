@@ -16,7 +16,8 @@
       <div class="form-group">
         <label for="chat-log"></label>
         <textarea class="form-control" id="chat-log" cols="150" rows="20"></textarea><br>
-        <input class="form-control" id="chat-message-input" type="text"><br>
+        <input class="form-control" id="nickname" type="text" placeholder="Your Nickname" style="width: 25%"><br>
+        <input class="form-control" id="chat-message-input" type="text" placeholder="Message"><br>
         <input class="form-control send-message default-button" id="chat-message-submit" type="button" value="Send">
         {{ room_name|json_script:"room-name" }}
         <script>
@@ -49,7 +50,8 @@
 
           document.querySelector('#chat-message-submit').onclick = function (e) {
             const messageInputDom = document.querySelector('#chat-message-input');
-            const message = messageInputDom.value;
+            const nickname = document.querySelector('#nickname');
+            const message = nickname.value + ": " + messageInputDom.value;
             chatSocket.send(JSON.stringify({
               'message': message
             }));
